@@ -1,0 +1,43 @@
+{
+  "name": "quit-smoking",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:e2e": "playwright test",
+    "db:generate": "prisma generate",
+    "db:migrate": "prisma migrate dev"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
+    "@testing-library/user-event": "^14.6.1",
+    "@types/node": "^25.6.0",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "eslint": "^9.39.4",
+    "eslint-config-next": "^16.2.4",
+    "jsdom": "^29.1.0",
+    "next-test-api-route-handler": "^5.0.4",
+    "playwright": "^1.59.1",
+    "typescript": "^6.0.3",
+    "vitest": "^4.1.5"
+  },
+  "dependencies": {
+    "@prisma/client": "^7.8.0",
+    "clsx": "^2.1.1",
+    "date-fns": "^4.1.0",
+    "lucide-react": "^1.11.0",
+    "next": "^16.2.4",
+    "prisma": "^7.8.0",
+    "react": "^19.2.5",
+    "react-dom": "^19.2.5",
+    "zod": "^4.3.6"
+  }
+}
