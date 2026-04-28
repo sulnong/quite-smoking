@@ -1,0 +1,8 @@
+-- CreateTable
+CREATE TABLE "SmokeRecord" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "count" INTEGER NOT NULL DEFAULT 1,
+    "note" TEXT
+);
+

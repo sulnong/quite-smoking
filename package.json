@@ -4,6 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "preprisma": "node -e \"const fs=require('node:fs'); const path=require('node:path'); const dbPath=path.resolve('prisma/dev.db'); fs.mkdirSync(path.dirname(dbPath),{recursive:true}); fs.closeSync(fs.openSync(dbPath,'a')); console.log('DATABASE_URL=file:' + dbPath);\"",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
@@ -11,10 +12,11 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:e2e": "playwright test",
-    "db:generate": "prisma generate",
-    "db:migrate": "node -e \"const fs=require('node:fs'); fs.mkdirSync('prisma',{recursive:true}); fs.closeSync(fs.openSync('prisma/dev.db','a'));\" && prisma db push --skip-generate"
+    "db:generate": "node -e \"const {execSync}=require('node:child_process'); const fs=require('node:fs'); const path=require('node:path'); const dbPath=path.resolve('prisma/dev.db'); fs.mkdirSync(path.dirname(dbPath),{recursive:true}); fs.closeSync(fs.openSync(dbPath,'a')); const env={...process.env, DATABASE_URL: process.env.DATABASE_URL || ('file:' + dbPath)}; execSync('prisma generate', {stdio:'inherit', env});\"",
+    "db:migrate": "node -e \"const {execSync}=require('node:child_process'); const fs=require('node:fs'); const path=require('node:path'); const dbPath=path.resolve('prisma/dev.db'); fs.mkdirSync(path.dirname(dbPath),{recursive:true}); fs.closeSync(fs.openSync(dbPath,'a')); const env={...process.env, DATABASE_URL: process.env.DATABASE_URL || ('file:' + dbPath)}; execSync('prisma migrate deploy', {stdio:'inherit', env});\""
   },
   "devDependencies": {
+    "@playwright/test": "^1.59.1",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",
     "@testing-library/user-event": "^14.6.1",

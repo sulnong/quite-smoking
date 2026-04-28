@@ -23,16 +23,19 @@ describe("AppShell", () => {
       </AppShell>
     );
 
-    expect(screen.getByRole("link", { name: "今日" })).toHaveAttribute(
+    const today = screen.getByRole("link", { name: "今日" });
+    const records = screen.getByRole("link", { name: "记录" });
+    const progress = screen.getByRole("link", { name: "进展" });
+
+    expect(today).toHaveAttribute(
       "aria-current",
       "page"
     );
-    expect(screen.getByRole("link", { name: "记录" })).not.toHaveAttribute(
-      "aria-current"
-    );
-    expect(screen.getByRole("link", { name: "进展" })).not.toHaveAttribute(
-      "aria-current"
-    );
+    expect(today).toHaveClass("is-active");
+    expect(records).not.toHaveAttribute("aria-current");
+    expect(records).not.toHaveClass("is-active");
+    expect(progress).not.toHaveAttribute("aria-current");
+    expect(progress).not.toHaveClass("is-active");
 
     rerender(
       <AppShell pathname="/records">
@@ -40,9 +43,11 @@ describe("AppShell", () => {
       </AppShell>
     );
 
-    expect(screen.getByRole("link", { name: "记录" })).toHaveAttribute(
+    const records2 = screen.getByRole("link", { name: "记录" });
+    expect(records2).toHaveAttribute(
       "aria-current",
       "page"
     );
+    expect(records2).toHaveClass("is-active");
   });
 });
