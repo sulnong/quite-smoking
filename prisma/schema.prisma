@@ -7,9 +7,62 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model SmokeRecord {
-  id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  count     Int      @default(1)
-  note      String?
+model Settings {
+  id                       Int      @id @default(1)
+  treatmentStartDate       DateTime
+  targetQuitDate           DateTime?
+  baselineCigarettesPerDay Int
+  cigarettePricePerPack    Decimal
+  cigarettesPerPack        Int
+  timezone                 String
+  medicationName           String
+  medicationScheduleJson   String
+  createdAt                DateTime @default(now())
+  updatedAt                DateTime @updatedAt
+}
+
+model MedicationLog {
+  id               String   @id @default(cuid())
+  scheduledForDate DateTime
+  scheduledSlot    String
+  takenAt          DateTime?
+  status           String
+  note             String?
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}
+
+model SmokingLog {
+  id         String   @id @default(cuid())
+  smokedAt   DateTime
+  count      Int
+  contextTag String?
+  triggerTag String?
+  note       String?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model RecordEntry {
+  id         String   @id @default(cuid())
+  occurredAt DateTime
+  kind       String
+  severity   Int?
+  triggerTag String?
+  actionTag  String?
+  resolved   Boolean?
+  note       String?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model CravingFollowup {
+  id                  String   @id @default(cuid())
+  cravingRecordId     String   @unique
+  followupDueAt       DateTime
+  followupCompletedAt DateTime?
+  outcome             String?
+  note                String?
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
 }
