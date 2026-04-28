@@ -37,7 +37,8 @@ a {
 }
 
 .app-shell__main {
-  padding: 20px 16px 88px;
+  /* Keep content clear of the fixed tab bar, including safe-area insets. */
+  padding: 20px 16px calc(88px + env(safe-area-inset-bottom));
   max-width: 560px;
   width: 100%;
   margin: 0 auto;
@@ -73,4 +74,3 @@ a {
   background: var(--card);
   border: 1px solid var(--border);
 }
-
