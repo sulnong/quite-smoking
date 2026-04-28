@@ -7,12 +7,12 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "eslint . --max-warnings=0",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:e2e": "playwright test",
     "db:generate": "prisma generate",
-    "db:migrate": "prisma migrate dev"
+    "db:migrate": "node -e \"const fs=require('node:fs'); fs.mkdirSync('prisma',{recursive:true}); fs.closeSync(fs.openSync('prisma/dev.db','a'));\" && prisma db push --skip-generate"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^6.9.1",
@@ -30,12 +30,12 @@
     "vitest": "^4.1.5"
   },
   "dependencies": {
-    "@prisma/client": "^7.8.0",
+    "@prisma/client": "^6.19.3",
     "clsx": "^2.1.1",
     "date-fns": "^4.1.0",
     "lucide-react": "^1.11.0",
     "next": "^16.2.4",
-    "prisma": "^7.8.0",
+    "prisma": "^6.19.3",
     "react": "^19.2.5",
     "react-dom": "^19.2.5",
     "zod": "^4.3.6"

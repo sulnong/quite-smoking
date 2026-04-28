@@ -1,0 +1,16 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model SmokeRecord {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  count     Int      @default(1)
+  note      String?
+}
+
