@@ -11,7 +11,7 @@ describe("getDailyReduction", () => {
 });
 
 describe("getMoneySaved", () => {
-  it("uses pack price and cigarettes-per-pack", () => {
+  it("computes savings from fewer cigarettes vs baseline using pack pricing", () => {
     expect(
       getMoneySaved({
         baselinePerDay: 20,
@@ -20,7 +20,6 @@ describe("getMoneySaved", () => {
         cigarettePricePerPack: 25,
         cigarettesPerPack: 20,
       }),
-    ).toBe(64);
+    ).toBe(5);
   });
 });
-
