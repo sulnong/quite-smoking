@@ -25,6 +25,7 @@ model MedicationLog {
   id               String   @id @default(cuid())
   scheduledForDate DateTime
   scheduledSlot    String
+  doseMg           Float?
   takenAt          DateTime?
   status           String
   note             String?

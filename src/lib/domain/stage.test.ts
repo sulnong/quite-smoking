@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { getCurrentStage, getQuitWindow } from "@/lib/domain/stage";
+import { getCurrentStage, getDefaultQuitDate, getQuitWindow } from "@/lib/domain/stage";
 
 describe("getCurrentStage", () => {
   it("returns prep before the target quit date", () => {
@@ -32,3 +32,8 @@ describe("getQuitWindow", () => {
   });
 });
 
+describe("getDefaultQuitDate", () => {
+  it("defaults the formal quit date to treatment day 8", () => {
+    expect(getDefaultQuitDate("2026-04-28")).toBe("2026-05-05");
+  });
+});

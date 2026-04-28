@@ -32,3 +32,6 @@ export function getQuitWindow(treatmentStartDate: string): {
   };
 }
 
+export function getDefaultQuitDate(treatmentStartDate: string) {
+  return getQuitWindow(treatmentStartDate).earliest;
+}

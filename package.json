@@ -4,13 +4,13 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
+    "dev": "node ./scripts/runtime-env-runner.mjs next dev -H 127.0.0.1",
+    "build": "node ./scripts/runtime-env-runner.mjs next build",
+    "start": "node ./scripts/runtime-env-runner.mjs next start -H 127.0.0.1",
     "lint": "eslint . --max-warnings=0",
-    "test": "vitest run",
-    "test:watch": "vitest",
-    "test:e2e": "playwright test",
+    "test": "node ./scripts/runtime-env-runner.mjs vitest run",
+    "test:watch": "node ./scripts/runtime-env-runner.mjs vitest",
+    "test:e2e": "node ./scripts/runtime-env-runner.mjs playwright test",
     "db:generate": "node ./scripts/prisma-env-runner.mjs prisma generate",
     "db:migrate": "node ./scripts/prisma-env-runner.mjs prisma migrate deploy"
   },
@@ -39,6 +39,7 @@
     "prisma": "^6.19.3",
     "react": "^19.2.5",
     "react-dom": "^19.2.5",
+    "recharts": "^3.8.1",
     "zod": "^4.3.6"
   }
 }
