@@ -2,6 +2,9 @@ type SmokingLogItem = {
   id: string;
   smokedAt: Date;
   count: number;
+  contextTag?: string | null;
+  triggerTag?: string | null;
+  note?: string | null;
 };
 
 type RecordEntryItem = {
@@ -20,7 +23,10 @@ export function mergeTimelineItems(input: {
       id: item.id,
       at: item.smokedAt,
       kind: "smoking",
-      title: `抽烟 ${item.count} 支`
+      title: `抽烟 ${item.count} 支`,
+      detail: [item.contextTag, item.triggerTag ? `烟瘾后 ${item.triggerTag}` : null, item.note]
+        .filter(Boolean)
+        .join(" · ")
     })),
     ...input.recordEntries.map((item) => ({
       id: item.id,

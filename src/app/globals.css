@@ -186,6 +186,10 @@ a {
   margin-top: 18px;
 }
 
+.slot-grid--single {
+  grid-template-columns: 1fr;
+}
+
 .slot-card {
   display: flex;
   flex-direction: column;
@@ -226,6 +230,30 @@ a {
   font-size: 13px;
   color: inherit;
   opacity: 0.78;
+}
+
+.slot-card__summary {
+  display: grid;
+  gap: 10px;
+  width: 100%;
+  margin-top: 8px;
+}
+
+.slot-card__summary-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.16);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.slot-card__summary-value {
+  font-size: 17px;
+  line-height: 1.2;
 }
 
 .slot-card__field {
@@ -472,6 +500,14 @@ a {
   font-size: 13px;
 }
 
+.timeline-item__detail {
+  display: block;
+  margin-top: 6px;
+  color: var(--accent-strong);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
 .trend-list {
   display: grid;
   gap: 12px;
@@ -513,39 +549,72 @@ a {
 }
 
 .timer-ring {
+  position: relative;
   display: grid;
   place-items: center;
-  width: 160px;
-  height: 160px;
+  width: 220px;
+  height: 220px;
   margin: 0 auto;
   border-radius: 50%;
-  padding: 7px;
-  transition: background 320ms ease;
+}
+
+.timer-ring__svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.timer-ring__track,
+.timer-ring__progress {
+  fill: none;
+  stroke-width: 14;
+  stroke-linecap: round;
+}
+
+.timer-ring__track {
+  stroke: rgba(30, 111, 92, 0.12);
+}
+
+.timer-ring__progress {
+  stroke: #2dbe71;
+  transition: stroke-dasharray 260ms linear;
 }
 
 .timer-ring__inner {
+  position: absolute;
+  inset: 26px;
   display: grid;
   place-items: center;
-  width: 100%;
-  height: 100%;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.95);
-  box-shadow: inset 0 0 0 1px rgba(20, 18, 15, 0.06);
+  padding: 24px;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow:
+    inset 0 0 0 1px rgba(20, 18, 15, 0.04),
+    0 12px 30px rgba(30, 111, 92, 0.08);
 }
 
 .timer-ring__inner.is-running {
-  animation: breathe 3.2s ease-in-out infinite;
+  animation: breathe 2.6s ease-in-out infinite;
 }
 
 .timer-ring__label {
-  font-size: 12px;
+  font-size: 13px;
   color: var(--muted);
 }
 
 .timer-ring__time {
-  margin-top: 6px;
-  font-size: 30px;
+  margin-top: 8px;
+  font-size: 48px;
+  font-weight: 800;
   line-height: 1;
+}
+
+.timer-ring__hint {
+  margin-top: 10px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.55;
 }
 
 .timer-actions {
@@ -554,23 +623,34 @@ a {
   gap: 10px;
 }
 
-.timer-actions .primary-button {
-  grid-column: 1 / -1;
+.timer-controls {
+  display: grid;
+  gap: 10px;
+}
+
+.timer-controls .primary-button,
+.timer-controls .secondary-button {
   margin-top: 0;
 }
 
 @keyframes breathe {
   0% {
-    transform: scale(0.96);
-    box-shadow: inset 0 0 0 1px rgba(20, 18, 15, 0.06), 0 0 0 0 rgba(30, 111, 92, 0.16);
+    transform: scale(0.94);
+    box-shadow:
+      inset 0 0 0 1px rgba(20, 18, 15, 0.04),
+      0 0 0 0 rgba(45, 190, 113, 0.18);
   }
   50% {
-    transform: scale(1);
-    box-shadow: inset 0 0 0 1px rgba(20, 18, 15, 0.06), 0 0 0 10px rgba(30, 111, 92, 0.04);
+    transform: scale(1.02);
+    box-shadow:
+      inset 0 0 0 1px rgba(20, 18, 15, 0.04),
+      0 0 0 22px rgba(45, 190, 113, 0.08);
   }
   100% {
-    transform: scale(0.96);
-    box-shadow: inset 0 0 0 1px rgba(20, 18, 15, 0.06), 0 0 0 0 rgba(30, 111, 92, 0.16);
+    transform: scale(0.94);
+    box-shadow:
+      inset 0 0 0 1px rgba(20, 18, 15, 0.04),
+      0 0 0 0 rgba(45, 190, 113, 0.18);
   }
 }
 
@@ -593,6 +673,35 @@ a {
   color: var(--muted);
   line-height: 1.55;
   font-size: 13px;
+}
+
+.milestone-board {
+  margin-top: 18px;
+  padding-top: 2px;
+}
+
+.milestone-list {
+  display: grid;
+  gap: 12px;
+}
+
+.milestone-card {
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  background: rgba(251, 250, 247, 0.92);
+}
+
+.milestone-card__time {
+  display: block;
+  font-size: 16px;
+}
+
+.milestone-card__copy {
+  margin: 8px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.6;
 }
 
 @media (max-width: 420px) {

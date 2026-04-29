@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useTransition } from "react";
 
 type PrepStageCardProps = {
@@ -17,22 +18,8 @@ type PrepStageCardProps = {
 };
 
 export function PrepStageCard(props: PrepStageCardProps) {
+  const router = useRouter();
   const [isPending, startTransition] = useTransition();
-
-  function logOneCigarette() {
-    startTransition(async () => {
-      await fetch("/api/smoking-logs", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          smokedAt: new Date().toISOString(),
-          count: 1
-        })
-      });
-
-      window.location.reload();
-    });
-  }
 
   function updateQuitDate(formData: FormData) {
     startTransition(async () => {
@@ -44,7 +31,7 @@ export function PrepStageCard(props: PrepStageCardProps) {
         })
       });
 
-      window.location.reload();
+      router.refresh();
     });
   }
 
@@ -108,9 +95,6 @@ export function PrepStageCard(props: PrepStageCardProps) {
           {props.targetQuitDate ? "更新正式戒烟日" : "设置正式戒烟日"}
         </button>
       </form>
-      <button className="primary-button" type="button" disabled={isPending} onClick={logOneCigarette}>
-        {isPending ? "记录中..." : "快速记一支"}
-      </button>
     </section>
   );
 }

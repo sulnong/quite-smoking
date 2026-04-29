@@ -3,6 +3,7 @@ type TimelineItem = {
   title: string;
   kind: string;
   at: Date;
+  detail?: string;
 };
 
 const KIND_LABELS: Record<string, string> = {
@@ -22,6 +23,7 @@ export function Timeline({ items }: { items: TimelineItem[] }) {
           <article key={item.id} className="timeline-item">
             <div>
               <strong className="timeline-item__title">{item.title}</strong>
+              {item.detail ? <span className="timeline-item__detail">{item.detail}</span> : null}
               <span className="timeline-item__kind">{KIND_LABELS[item.kind] ?? item.kind}</span>
             </div>
             <time className="timeline-item__time">{item.at.toLocaleString("zh-CN")}</time>

@@ -89,6 +89,7 @@ export default async function Page() {
     treatmentStartDate: settings.treatmentStartDate.toISOString().slice(0, 10),
     date: new Date().toISOString().slice(0, 10)
   });
+  const medicationComplete = medicationLogs.length >= medicationPlan.slots.length;
 
   return (
     <AppShell pathname="/">
@@ -99,18 +100,20 @@ export default async function Page() {
           现在先按时服药、真实记录抽烟数量。你不需要一开始就完美，只需要持续把数据记下来。
         </p>
       </section>
-      <MedicationCard
-        treatmentDay={treatmentDay}
-        planSummary={medicationPlan.summary}
-        planDescription={medicationPlan.description}
-        slots={medicationPlan.slots}
-        scheduledForDate={startOfDay.toISOString()}
-        completedLogs={medicationLogs.map((log) => ({
-          scheduledSlot: log.scheduledSlot,
-          takenAt: log.takenAt?.toISOString() ?? null,
-          doseMg: log.doseMg ?? null
-        }))}
-      />
+      {medicationComplete ? null : (
+        <MedicationCard
+          treatmentDay={treatmentDay}
+          planSummary={medicationPlan.summary}
+          planDescription={medicationPlan.description}
+          slots={medicationPlan.slots}
+          scheduledForDate={startOfDay.toISOString()}
+          completedLogs={medicationLogs.map((log) => ({
+            scheduledSlot: log.scheduledSlot,
+            takenAt: log.takenAt?.toISOString() ?? null,
+            doseMg: log.doseMg ?? null
+          }))}
+        />
+      )}
       {summary.stage === "prep" ? (
         <PrepStageCard
           treatmentDay={treatmentDay}
