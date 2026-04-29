@@ -4,8 +4,12 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "db:prepare": "pnpm db:migrate && pnpm db:generate",
+    "predev": "pnpm db:prepare",
     "dev": "node ./scripts/runtime-env-runner.mjs next dev -H 127.0.0.1",
+    "prebuild": "pnpm db:prepare",
     "build": "node ./scripts/runtime-env-runner.mjs next build",
+    "prestart": "pnpm db:prepare",
     "start": "node ./scripts/runtime-env-runner.mjs next start -H 127.0.0.1",
     "lint": "eslint . --max-warnings=0",
     "test": "node ./scripts/runtime-env-runner.mjs vitest run",
